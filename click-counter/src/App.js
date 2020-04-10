@@ -29,6 +29,13 @@ class App extends React.Component {
             >
             Increment
             </button>
+            <button 
+              className="ui red button" 
+              data-test="decrement-button"
+              onClick={() => { this.state.counter <= 0 ? this.setState({counter: 0}) : this.setState({counter: this.state.counter - 1}) }}
+            >
+            Decrement
+            </button>
           </div>
         </div>
       </div>

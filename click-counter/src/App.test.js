@@ -93,7 +93,37 @@ describe('Counter App Test Suite', () => {
     // Finding the increment label
     const incrementLabel = findByTestAttr(wrapper, 'increment-display');
 
-    
+
     expect(incrementLabel.text()).toContain(counter + 1);
   });
+
+  test('Validate that the decrement button decreases the number displayed', () => {
+
+    const counter = 15;
+    const wrapper = setup(null, {counter});
+
+    const decrementButton = findByTestAttr(wrapper, 'decrement-button');
+
+    decrementButton.simulate('click')
+
+    const incrementLabel = findByTestAttr(wrapper, 'increment-display');
+
+    expect(incrementLabel.text()).toContain(counter - 1);
+  });
+
+  test('Validate that negative numbers are not displayed on the increment label', () => {
+
+    const counter = 0;
+    const wrapper = setup(null, {counter});
+
+    const decrementButton = findByTestAttr(wrapper, 'decrement-button');
+
+    decrementButton.simulate('click')
+
+    const incrementLabel = findByTestAttr(wrapper, 'increment-display');
+
+    jest.spyOn(window, 'alert').mockImplementation(() => {});
+
+    expect(incrementLabel.text()).toContain(counter);
+  })
 })
